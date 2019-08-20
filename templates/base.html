@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask Database Many-to-Many Relationship Example</title>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />-->
+</head>
+
+<body>
+    <div class="container">
+        <form class="form" method="POST" action="/user">
+            <label>New user</label>
+            <input type="text" name="newuser" id="newuser" placeholder="Enter new user"/>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+
+    <div class="userlist">
+        <table>
+            <th>User ID</th>
+            <th>User name</th>
+            {% if users|length < 1 %}
+            <p>There are no users on this platform. Create one today.</p>
+            {% else %}
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.user_id }}</td>
+                    <td>{{ user.user_name }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+           
+        </table>
+    </div>
+    <br>
+    <hr>
+    <br>
+
+    <div class="container">
+        <form class="form" method="POST" action="/channel">
+            <label>New channel</label>
+            <input type="text" name="newchannel" id="newchannel" placeholder="Enter new channel"/>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+
+    <div class="channellist">
+        <table>
+            <th>Channel ID</th>
+            <th>Channel name</th>
+            {% if channels|length < 1 %}
+            <p>There are no channels on this platform. Create one today.</p>
+            {% else %}
+                {% for channel in channels %}
+                <tr>
+                    <td>{{ channel.channel_id }}</td>
+                    <td>{{ channel.channel_name }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+          
+        </table>
+    </div>
+    <br>
+    <hr>
+    <br>
+
+    <div class="container">
+        <form class="form" method="POST" action="/subscribe">
+            <label>Your username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your username"/>
+            <label>Channel to subscribe to</label>
+            <input type="text" name="channelTo" id="channelTo" placeholder="Enter the channel you want to subscribe to"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <br>
+    <hr>
+    <br>
+
+    <div class="subscriberlist">
+        <h2>Subscriptions</h2>
+            {% if channels|length < 1 %}
+            <p>There are no channels on this platform. Create one today.</p>
+            {% else %}
+                {% for channel in channels %}
+                    <h3>{{ channel.channel_name }}</h3>
+                    {% for subscriber in channel.subscribers %}
+                        <p>- {{ subscriber.user_name }}</p>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+          
+        </table>
+    </div>
+</body>
