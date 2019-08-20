@@ -1,6 +1,6 @@
 # Flask-DB-Many-to-Many-Relationship
 A Youtube system clone to showcase many-to-many relationship using Flask SQLAlchemy
-![Screenshot of app]
+![Screenshot of app](https://github.com/Raylow00/Flask-DB-Many-to-Many-Relationship/blob/master/Screenshot.png)
 
 In any web applications that we see nowadays, the database established on the back-end side has to deal with a lot of relationships with multiple tables.
 Using Flask SQLAlchemy, this kind of relationship can be established fairly easily.
